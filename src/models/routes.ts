@@ -1,6 +1,5 @@
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+import { RouteObject } from "react-router-dom";
 
-export type RoutePath = {
-  path: string;
-  component: ReactJSXElement;
-};
+export type RouterConfig = {
+  routeName: string;
+} & RouteObject;

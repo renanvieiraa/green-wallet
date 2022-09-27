@@ -1,19 +1,6 @@
-import { Route, RouteObject, Routes } from "react-router-dom";
+import { routes } from "constans";
+import { Route, Routes } from "react-router-dom";
 import Home from "./features/Home/Home";
-import OperationList from "./features/OperationList/OperationList";
-
-export const routes: (RouteObject & { routerName?: string })[] = [
-  {
-    routerName: "Página inicial",
-    path: "/",
-    element: <Home />,
-  },
-  {
-    routerName: "Lista de transações",
-    path: "/operation-list",
-    element: <OperationList />,
-  },
-];
 
 function RoutesApp() {
   return (

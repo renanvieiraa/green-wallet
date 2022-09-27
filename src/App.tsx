@@ -5,7 +5,7 @@ import RoutesApp from "./routes";
 
 function App() {
   return (
-    <section>
+    <section className='main-container'>
       <BrowserRouter>
         <Navbar />
         <main>
