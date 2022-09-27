@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+.main-container {
+  background-color: var(--white);
+  min-height: 100vh;
+  display: flex;
+
+  main {
+    width: 100%;
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
