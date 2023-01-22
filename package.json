@@ -53,7 +53,6 @@
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
     "sass": "^1.55.0",
     "typescript": "^4.8.3",
     "web-vitals": "^2.1.4"
@@ -65,7 +64,9 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.66",
     "@electron-forge/maker-zip": "^6.0.0-beta.66",
     "electron": "^20.2.0",
-    "react-router-dom": "^6.4.1"
+    "react-router-dom": "^6.4.1",
+    "react-scripts": "5.0.1",
+    "webpack-node-externals": "^3.0.0"
   },
   "config": {
     "forge": "./forge.config.json"
