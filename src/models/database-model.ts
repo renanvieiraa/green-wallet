@@ -1,3 +1,5 @@
-export enum DbTable {
+export enum Collection {
   USERS = 'users',
+  TRANSACTIONS = 'transactions',
+  CATEGORIES = 'categories',
 }

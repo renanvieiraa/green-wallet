@@ -1,13 +1,13 @@
-import { DbTable } from 'models/database-model';
+import { Collection } from 'models/database-model';
 import { FileTypes } from 'models/files-types.model';
 import StorageService from './StorageService';
 
 type Database = {
-  [key in DbTable]: any[];
+  [key in Collection]: any[];
 };
 
 const dbService = {
-  get: (table: DbTable) => {
+  get: (table: Collection) => {
     let database: Database;
     const getDatabase = async () => {
       const service = await StorageService.readFile('db', FileTypes.JSON);
@@ -21,6 +21,12 @@ const dbService = {
           return database[table].find((item) => JSON.stringify(item) === JSON.stringify(value));
         }
         return null;
+      },
+      findByParams: async (params: { [index: string]: any }) => {
+        await getDatabase();
+        if (database) {
+          return database[table].filter((item) => Object.entries(params).every(([key, value]) => item[key] === value));
+        }
       },
       push: async (value: unknown) => {
         await getDatabase();
@@ -38,7 +44,15 @@ const dbService = {
         }
       },
     };
-    return methods;
+    return {
+      ...methods,
+      getAll<T>(): Promise<T> {
+        return methods.getAll() as Promise<T>;
+      },
+      findByParams<T>(params: { [index: string]: any }): Promise<T> {
+        return methods.findByParams(params) as Promise<T>;
+      },
+    };
   },
 };
 
