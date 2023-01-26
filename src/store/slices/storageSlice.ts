@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DbTable } from 'models/database-model';
+import { Collection } from 'models/database-model';
 
 export type Database = {
-  [key in DbTable]: Array<Record<string, any>>;
+  [key in Collection]: Array<Record<string, any>>;
 };
 let database: Database;
 

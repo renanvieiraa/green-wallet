@@ -1,27 +1,25 @@
-import Button from '@mui/material/Button';
 import { DataGrid, GridColumns } from '@mui/x-data-grid';
-import { DbTable } from 'models/database-model';
+import { Collection } from 'models/database-model';
 import { useEffect, useState } from 'react';
 import dbService from 'services/DataBaseService';
+import { getAllTransactions } from 'services/TransactionService';
 
 const columns: GridColumns = [
   { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
+  { field: 'description', headerName: 'Descrição', width: 130 },
+  { field: 'value', headerName: 'Valor', width: 130 },
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
+    field: 'category',
+    headerName: 'Categoria',
   },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) => `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+  // {
+  //   field: 'fullName',
+  //   headerName: 'Full name',
+  //   description: 'This column has a value getter and is not sortable.',
+  //   sortable: false,
+  //   width: 160,
+  //   valueGetter: (params) => `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  // },
 ];
 
 // const rows: GridRowsProp = [
@@ -42,7 +40,7 @@ export default function OperationList() {
   const additem = () => {
     const item = { lastName: 'eeee', firstName: 'Harvey', age: 652 };
     dbService
-      .get(DbTable.USERS)
+      .get(Collection.USERS)
       .push(item)
       .then((result) => {
         getAll();
@@ -51,12 +49,10 @@ export default function OperationList() {
   };
 
   const getAll = () => {
-    return dbService
-      .get(DbTable.USERS)
-      .getAll()
-      .then((response) => {
-        setList(response);
-      });
+    return getAllTransactions.then((result) => {
+      console.log(result);
+      setList(result);
+    });
   };
   useEffect(() => {
     getAll();
@@ -66,14 +62,12 @@ export default function OperationList() {
     <section style={{ width: '100%', height: 600 }}>
       <DataGrid
         columns={columns}
-        rows={list.map((item: any, index: number) => ({ ...item, id: index }))}
+        rows={list}
         getRowId={(item) => item.id}
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
-
-      <Button onClick={() => additem()}>Teste</Button>
     </section>
   );
 }
