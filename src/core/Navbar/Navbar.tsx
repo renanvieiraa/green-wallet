@@ -1,12 +1,13 @@
-import styled from "@emotion/styled";
-import { ChevronLeftOutlined, ChevronRightOutlined } from "@mui/icons-material";
-import { routes } from "constans";
-import logo from "logo.svg";
-import React from "react";
-import { connect, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { changeMenuState } from "store/reducers/index";
-import "./Navbar.scss";
+import styled from '@emotion/styled';
+import { ChevronLeftOutlined, ChevronRightOutlined } from '@mui/icons-material';
+import { routes } from 'constans';
+import logo from 'logo.svg';
+import React from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { toggleMenuState } from 'store/slices/menuToggleSlice';
+import './Navbar.scss';
 
 const DebuggValue = styled.div`
   position: absolute;
@@ -27,16 +28,16 @@ const NavBar = function Navbar({ menuToggle }: Props) {
   // const menuToggle = useSelector((state: any) => state.menuToggle);
 
   // const [menuToggle, setMenuToggle] = useState(true);
-
-  const dispatch = useDispatch();
+  const menuShrinkState = useAppSelector((state) => state.menuToggle.value);
+  const dispatch = useAppDispatch();
 
   function addClass(className: string, condition: boolean) {
-    return condition ? className : "";
+    return condition ? className : '';
   }
 
   return (
-    <nav className={addClass("shrink", !!menuToggle.shrink)}>
-      <DebuggValue>{menuToggle.shrink ? "true" : "false"}</DebuggValue>
+    <nav className={addClass('shrink', !!menuShrinkState.shrink)}>
+      <DebuggValue>{menuShrinkState.shrink ? 'true' : 'false'}</DebuggValue>
       <section className='header'>
         <img src={logo} alt='logo' />
       </section>
@@ -44,9 +45,9 @@ const NavBar = function Navbar({ menuToggle }: Props) {
       <ul>
         {routes.map((route, index) => (
           <li className='menu-item' key={index}>
-            <NavLink key={index} to={`${route.path}`} end={route.path === "/"}>
+            <NavLink key={index} to={`${route.path}`} end={route.path === '/'}>
               {route.icon ? React.cloneElement(route.icon, { className: `menu-icon` }) : null}
-              <span className={""}>{route.routeName}</span>
+              <span className={''}>{route.routeName}</span>
             </NavLink>
           </li>
         ))}
@@ -54,8 +55,8 @@ const NavBar = function Navbar({ menuToggle }: Props) {
 
       <div>
         <footer>
-          <a className='chevron' href='#' onClick={() => dispatch(changeMenuState())}>
-            {menuToggle.shrink ? <ChevronRightOutlined /> : <ChevronLeftOutlined />}
+          <a className='chevron' href='javascript:void(0)' onClick={() => dispatch(toggleMenuState())}>
+            {menuShrinkState.shrink ? <ChevronRightOutlined /> : <ChevronLeftOutlined />}
           </a>
         </footer>
       </div>
