@@ -1,0 +1,22 @@
+<nav>
+  <section class="header">
+    <span> GreenWallet </span>
+    <!-- <img src="logo" alt="logo" /> -->
+  </section>
+
+  <ul>
+    <li *ngFor="let item of menu">
+      <a href="javascript:void(0)" [routerLink]="item.path">
+        {{ item.label }}
+      </a>
+    </li>
+  </ul>
+
+  <div>
+    <footer>
+      <!-- <a class='chevron' href='javascript:void(0)' onClick={() => dispatch(toggleMenuState())}>
+          {menuShrinkState.shrink ? <ChevronRightOutlined /> : <ChevronLeftOutlined />}
+        </a> -->
+    </footer>
+  </div>
+</nav>

@@ -1,0 +1,14 @@
+.container {
+  // background-color: aqua;
+  height: 100vh;
+
+  app-nav-bar {
+    background-color: red;
+  }
+
+  main {
+    overflow: auto;
+    width: 100%;
+    // background-color: aliceblue;
+  }
+}
